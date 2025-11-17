@@ -1,0 +1,21 @@
+{
+  "name": "btm-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "deploy": "git add . && git commit -m \"Update API\" && git push origin main",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "A simple API to interact with the BTM smart contract on Monad Testnet",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "web3": "^1.10.4"
+  }
+}
