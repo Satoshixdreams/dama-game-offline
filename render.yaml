@@ -1,9 +1,13 @@
 services:
   - type: web
-    name: btm-api
+    name: dama-api
     env: node
     buildCommand: npm install
     startCommand: npm start
     envVars:
+      - key: ROOT_URL
+        value: https://example.com
+      - key: OWNER_ADDRESS
+        value: 0x0000000000000000000000000000000000000000
       - key: PORT
         value: 3001

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+  <rect width="1080" height="1920" fill="#1A1625"/>
+  <rect x="90" y="180" width="900" height="780" rx="32" fill="#2C2A3A"/>
+  <rect x="90" y="1030" width="900" height="710" rx="32" fill="#2C2A3A"/>
+  <text x="540" y="100" font-size="64" text-anchor="middle" fill="#FFFFFF" font-family="Inter, Arial">Turkish Draughts</text>
+  <text x="540" y="165" font-size="28" text-anchor="middle" fill="#EAEAEA" font-family="Inter, Arial">Sample Screenshot</text>
+</svg>

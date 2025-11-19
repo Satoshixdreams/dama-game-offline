@@ -7,7 +7,8 @@ const path = require('path');
 
 // Middleware
 app.use(express.json());
-app.use(cors()); // Enable CORS for all routes
+app.use(cors());
+app.use(express.static('public'));
 
 async function testConnection() {
   console.log('Offline mode: blockchain connectivity disabled.');
@@ -16,8 +17,7 @@ async function testConnection() {
 
 // API Routes
 app.get('/', (req, res) => {
-  console.log('Root endpoint accessed');
-  res.json({ message: 'Game API is running' });
+  res.redirect('/game')
 });
 
 // Health check endpoint
@@ -30,6 +30,35 @@ app.get('/health', (req, res) => {
 
 app.get('/game', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'))
+})
+
+app.get('/miniapp.json', (req, res) => {
+  const ROOT_URL = process.env.ROOT_URL || `http://localhost:${process.env.PORT || 3001}`
+  const config = {
+    accountAssociation: { header: "", payload: "", signature: "" },
+    baseBuilder: { ownerAddress: process.env.OWNER_ADDRESS || "0x" },
+    miniapp: {
+      version: "1",
+      name: "Dama",
+      subtitle: "Turkish Draughts",
+      description: "Play Turkish Draughts with AI or PvP",
+      screenshotUrls: [`${ROOT_URL}/screenshot-portrait.svg`],
+      iconUrl: `${ROOT_URL}/icon.svg`,
+      splashImageUrl: `${ROOT_URL}/hero.svg`,
+      splashBackgroundColor: "#000000",
+      homeUrl: `${ROOT_URL}/game`,
+      webhookUrl: `${ROOT_URL}/api/webhook`,
+      primaryCategory: "games",
+      tags: ["draughts", "checkers", "board", "ai"],
+      heroImageUrl: `${ROOT_URL}/hero.svg`,
+      tagline: "Play and strategize",
+      ogTitle: "Dama – Turkish Draughts",
+      ogDescription: "Classic Turkish Draughts with AI",
+      ogImageUrl: `${ROOT_URL}/hero.svg`,
+      noindex: true
+    }
+  }
+  res.json(config)
 })
 
 // Removed blockchain-related routes: /token-info, /symbol, /totalSupply, /balance
@@ -114,6 +143,10 @@ app.get('/get-points/:address', async (req, res) => {
 });
 
 // Removed claim-rewards endpoint
+
+app.post('/api/webhook', (req, res) => {
+  res.json({ ok: true })
+})
 
 // THEN add the catch-all route
 app.use((req, res) => {
