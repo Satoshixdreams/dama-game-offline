@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
+    "build": "echo \"No build step (Node/Express server)\"",
     "deploy": "git add . && git commit -m \"Update API\" && git push origin main",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
