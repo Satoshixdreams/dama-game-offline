@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Turkish Draughts - Game</title>
+    <title>checkers game</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -190,16 +190,14 @@
 </head>
 <body>
 
-    <h1>Turkish Draughts - Game</h1>
+    <h1>checkers game</h1>
 
     <div class="game-container">
-        <div class="sidebar">
+        <div id="board"></div>
         <div class="game-info">
             <div class="status-area" id="statusArea">Initializing...</div>
-            <div class="player-stats" id="playerStatsArea">
-                 </div>
+            <div class="player-stats" id="playerStatsArea"></div>
         </div>
-
         <div class="game-setup">
             <div class="mode-selection">
                 <label for="gameMode">Player vx Bot (Ai)</label>
@@ -210,9 +208,6 @@
             </div>
             <button id="newGameBtn" class="accent">New Game</button>
         </div>
-        </div>
-
-        <div id="board"></div>
     </div>
 
     
