@@ -10,11 +10,6 @@ const zlib = require('zlib');
 app.use(express.json());
 app.use(cors());
 app.use(express.static('public'));
-app.use((req, res, next) => {
-  res.set('Content-Security-Policy', "frame-ancestors 'self' https://*.farcaster.xyz https://*.warpcast.com https://*.vercel.app http://localhost:*");
-  res.removeHeader('X-Frame-Options');
-  next();
-});
 
 async function testConnection() {
   console.log('Offline mode: blockchain connectivity disabled.');
