@@ -91,9 +91,15 @@ app.get('/splash.png', (req, res) => {
 })
 
 app.get('/image.png', (req, res) => {
-  const png = generatePng(1200, 630, 32, 24, 24);
+  const png = generatePng(1200, 800, 32, 24, 24);
   res.set('Content-Type', 'image/png');
   res.send(png);
+})
+
+app.get('/og.png', (req, res) => {
+  const target = process.env.OG_IMAGE_URL
+  if (target && /^https?:\/\//.test(target)) return res.redirect(307, target)
+  return res.redirect(307, '/image.png')
 })
 
 app.get('/miniapp.json', (req, res) => {
