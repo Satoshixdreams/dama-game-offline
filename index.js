@@ -61,6 +61,35 @@ app.get('/miniapp.json', (req, res) => {
   res.json(config)
 })
 
+app.get('/farcaster.json', (req, res) => {
+  const ROOT_URL = process.env.ROOT_URL || `http://localhost:${process.env.PORT || 3001}`
+  const config = {
+    accountAssociation: { header: "", payload: "", signature: "" },
+    baseBuilder: { ownerAddress: process.env.OWNER_ADDRESS || "0x" },
+    miniapp: {
+      version: "1",
+      name: "Dama",
+      homeUrl: `${ROOT_URL}/game`,
+      iconUrl: `${ROOT_URL}/icon.svg`,
+      splashImageUrl: `${ROOT_URL}/hero.svg`,
+      splashBackgroundColor: "#000000",
+      webhookUrl: `${ROOT_URL}/api/webhook`,
+      subtitle: "Turkish Draughts",
+      description: "Play Turkish Draughts with AI or PvP",
+      screenshotUrls: [`${ROOT_URL}/screenshot-portrait.svg`],
+      primaryCategory: "games",
+      tags: ["draughts", "checkers", "board", "ai"],
+      heroImageUrl: `${ROOT_URL}/hero.svg`,
+      tagline: "Play and strategize",
+      ogTitle: "Dama – Turkish Draughts",
+      ogDescription: "Classic Turkish Draughts with AI",
+      ogImageUrl: `${ROOT_URL}/hero.svg`,
+      noindex: true
+    }
+  }
+  res.json(config)
+})
+
 // Removed blockchain-related routes: /token-info, /symbol, /totalSupply, /balance
 
 // Remove the first claim-rewards endpoint (around line 150-200)
