@@ -22,6 +22,14 @@ function rootUrl(req) {
   return process.env.ROOT_URL || `${proto}://${host}`;
 }
 
+function allowedAddresses() {
+  const csv = process.env.ALLOWED_ADDRESSES || '';
+  const list = csv.split(',').map(s => s.trim()).filter(Boolean);
+  const owner = process.env.OWNER_ADDRESS || '';
+  if (owner && !list.includes(owner)) list.push(owner);
+  return list;
+}
+
 function crc32(buf) {
   let c = ~0;
   for (let i = 0; i < buf.length; i++) {
@@ -110,7 +118,7 @@ app.get('/miniapp.json', (req, res) => {
       payload: process.env.ACCOUNT_PAYLOAD || "",
       signature: process.env.ACCOUNT_SIGNATURE || ""
     },
-    baseBuilder: { ownerAddress: process.env.OWNER_ADDRESS || "0x" },
+    baseBuilder: { ownerAddress: process.env.OWNER_ADDRESS || "0x", allowedAddresses: allowedAddresses() },
     miniapp: {
       version: "1",
       name: "Dama",
@@ -144,7 +152,7 @@ app.get('/farcaster.json', (req, res) => {
       payload: process.env.ACCOUNT_PAYLOAD || "",
       signature: process.env.ACCOUNT_SIGNATURE || ""
     },
-    baseBuilder: { ownerAddress: process.env.OWNER_ADDRESS || "0x" },
+    baseBuilder: { ownerAddress: process.env.OWNER_ADDRESS || "0x", allowedAddresses: allowedAddresses() },
     miniapp: {
       version: "1",
       name: "Dama",
@@ -182,7 +190,7 @@ app.get('/.well-known/farcaster.json', (req, res) => {
       payload: process.env.ACCOUNT_PAYLOAD || "",
       signature: process.env.ACCOUNT_SIGNATURE || ""
     },
-    baseBuilder: { ownerAddress: process.env.OWNER_ADDRESS || "0x" },
+    baseBuilder: { ownerAddress: process.env.OWNER_ADDRESS || "0x", allowedAddresses: allowedAddresses() },
     miniapp: {
       version: "1",
       name: "Dama",
